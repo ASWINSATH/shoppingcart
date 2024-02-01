@@ -1,0 +1,18 @@
+.model{
+    @apply h-screen bg-black flex items-center justify-center
+}
+.login{
+    @apply  bg-white w-fit rounded-xl  h-fit mt-8 px-4 py-8
+}
+.logdiv{
+    @apply text-center mt-2
+}
+.loghead{
+    @apply text-3xl font-bold
+}
+.logh3{
+    @apply p-8
+}
+.cancel{
+    @apply pl-72
+}

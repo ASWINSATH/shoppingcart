@@ -1,0 +1,9 @@
+.card{
+    @apply p-1 font-semibold 
+}
+.btn{
+    @apply bg-blue-900 w-[300px] h-[40px] rounded-3xl text-white text-xl font-semibold m-2 p-1
+} 
+.input{
+    @apply  w-[300px] h-[40px] bg-zinc-100 rounded-lg text-sm p-2
+}
