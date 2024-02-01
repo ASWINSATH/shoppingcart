@@ -2,17 +2,17 @@
     @apply h-screen bg-black flex items-center justify-center
 }
 .login{
-    @apply  bg-white w-fit rounded-xl  h-fit mt-8 px-4 py-8
+    @apply  bg-white w-fit lg:rounded-xl md:rounded-xl sm:rounded-md  h-fit lg:mt-8 md:mt-8 mt-6 lg:px-4 md:px-4 px-2 lg:py-8 md:py-8 py-6
 }
 .logdiv{
-    @apply text-center mt-2
+    @apply text-center lg:mt-2 md:mt-2 mt-2
 }
 .loghead{
-    @apply text-3xl font-bold
+    @apply lg:text-3xl md:text-2xl text-xl lg:font-bold md:font-semibold font-medium
 }
 .logh3{
-    @apply p-8
+    @apply lg:p-8 md:p-8 p-6
 }
 .cancel{
-    @apply pl-72
+    @apply lg:pl-72 md:pl-72 pl-64
 }

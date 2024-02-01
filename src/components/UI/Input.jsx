@@ -3,7 +3,7 @@ import "../styles/style.css";
 
 function Input({ label, value, setValue, type, placeholder, tabIndex }) {
   return (
-    <div className="card p-2 ">
+    <div className="card">
       <label >{label}</label>
       <br/>
       <input
