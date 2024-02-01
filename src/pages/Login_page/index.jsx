@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
+import { RiEyeCloseLine } from "react-icons/ri";
+import { GiCancel } from "react-icons/gi";
+import { useNavigate } from "react-router-dom";
 import "./styles/style.css";
 
 function Signin() {
+  const navigate = useNavigate()
   const { name, setName } = useState("");
   const { password, setPassword } = useState("");
   const handleClick = () => {};
@@ -13,20 +17,8 @@ function Signin() {
         <div className="login">
           <div>
             <div className="cancel">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                />
-              </svg>
+              
+                <GiCancel />
             </div>
             <div className="logdiv">
               <h1 className="loghead">Welcome back !</h1>
@@ -47,7 +39,7 @@ function Signin() {
               />
             </div>
 
-            <div className="">
+            <div className="relative">
               <Input
                 label="Password"
                 value={password}
@@ -55,10 +47,21 @@ function Signin() {
                 type="password"
                 placeholder="*******"
               />
+              <RiEyeCloseLine className="absolute h-6 w-7 top-9 inset-y-0 right-3 pr-3 flex items-center cursor-pointer" />
+            </div>
+            <div className="forpsw">
+              <button>
+                Forgot password ?
+              </button>
             </div>
 
-            <div>
+            <div className="mb-2">
               <Button name="Login" onClick={handleClick} />
+            </div>
+            <div  className="flex justify-end mb-2 mr-2">
+              <button onClick={() => navigate("/signup")}>
+                Not a User
+              </button>
             </div>
           </div>
         </div>
