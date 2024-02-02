@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import Input from "../../components/UI/Input";
 import Button from "../../components/UI/Button";
 import { RiEyeCloseLine } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 import "./styles/style.css";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const { name, setName } = useState("");
   const { email, setEmail } = useState("");
   const { number, setNumber } = useState("");
@@ -14,11 +16,12 @@ const SignUp = () => {
   const handleClick = () => {};
   return (
     <div className="model">
-      <div className="login">
+      <div className="login rounded-lg"> 
         <div>
-          <div>
+          <h1 className="text-center mb-5 text-blue-500 font-bold">Sign up</h1>
+          <div className="ml-1">
             <Input
-              className=""
+              
               label="Name"
               value={name}
               setName={setName}
@@ -26,7 +29,7 @@ const SignUp = () => {
               placeholder="Enter Your Name"
             />
           </div>
-          <div>
+          <div className="ml-1">
             <Input
               className=""
               label="email"
@@ -36,7 +39,7 @@ const SignUp = () => {
               placeholder="Enter Your Email"
             />
           </div>
-          <div>
+          <div className="ml-1">
             <Input
               className=""
               label="Number"
@@ -46,17 +49,17 @@ const SignUp = () => {
               placeholder="Enter Your Number"
             />
           </div>
-          <div className="relative">
+          <div className="relative ml-1">
             <Input
               label="Password"
               value={password}
-              setValue={setPassword}
+              setValue={setPassword}se
               type="password"
               placeholder="Enter Your Psssword"
             />
-            <RiEyeCloseLine className="absolute h-6 w-7 top-9 inset-y-0 right-3 pr-3 flex items-center cursor-pointer" />
+            <RiEyeCloseLine className="absolute h-6 w-7 top-9 inset-y-0 right-3 pr-3 -m-1 flex items-center cursor-pointer" />
           </div>
-          <div className="relative">
+          <div className="relative mb-4 ml-1">
             <Input
               label="Confirm Password"
               value={confirmpassword}
@@ -64,10 +67,13 @@ const SignUp = () => {
               type="password"
               placeholder="Confirm Password"
             />
-            <RiEyeCloseLine className="absolute h-6 w-7 top-9 inset-y-0 right-3 pr-3 flex items-center cursor-pointer" />
+            <RiEyeCloseLine className="absolute h-6 w-7 top-9 inset-y-0 right-3 pr-3 -m-1 flex items-center cursor-pointer" />
           </div>
-          <div>
+          <div className="mb-2">
             <Button name="sign up" onClick={handleClick} />
+          </div>
+          <div className="text-center">
+            Already have an account?<button className="text-blue-500" onClick={() => navigate("/")}>Log in</button>
           </div>
         </div>
       </div>
