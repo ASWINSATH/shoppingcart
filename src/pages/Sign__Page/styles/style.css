@@ -1,8 +1,8 @@
-.model{
+.model1{
     @apply h-screen bg-black flex items-center justify-center 
 }
-.login{
-    @apply  bg-white w-fit lg:rounded-xl md:rounded-xl sm:rounded-md  h-fit lg:mt-8 md:mt-8 mt-6 lg:px-4 md:px-4 px-2 lg:py-8 md:py-8 py-6
+.login1{
+    @apply  bg-white w-fit lg:rounded-xl md:rounded-xl sm:rounded-md lg:mt-8 md:mt-8 mt-6 lg:px-4 md:px-4 px-2 lg:py-8 md:py-8 py-6
 }
 .notuser{
     @apply flex justify-center bg-zinc-300 text-sm w-[100px] h-[30px] font-medium m-1 rounded-3xl 
