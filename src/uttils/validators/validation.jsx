@@ -1,8 +1,8 @@
 export default function validation(values) {
-    console.log(values);
+    
   const errors = {};
   const email_pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
+  const password_pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$/
   const phone_pattern = /^\d{10}$/;
 
   if (values.name === "") {
@@ -24,15 +24,9 @@ export default function validation(values) {
 
   if (values.password === "") {
     errors.password = "Password Required";
-  } else if (!password_pattern.test(values.password)) {
-    errors.password = "Password did'nt match";
-  }
-
-  if (values.confirmpassword === "") {
-    errors.confirmpassword = " Confirm Password Required";
-  } else if (values.password !== values.confirmpassword) {
-    errors.confirmpassword = " Passwords did'nt match";
-  }
+  // } else if (!password_pattern.test(values.password)) {
+  //   errors.password = "Passwords did'nt match";
+   }
 
   if (values.confirmpassword === "") {
     errors.confirmpassword = " Confirm Password Required";

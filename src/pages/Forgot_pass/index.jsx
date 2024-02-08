@@ -85,10 +85,7 @@ const Forgotpass = () => {
               onChange={handleChange}
             />
             {errors.confirmpassword && <p style={{ color: "red" }}>{errors.confirmpassword}</p>}
-            {/* <div className= "text-white bg-blue-900 rounded-xl border-2 text-center mt-6 h-[30px] w-[305px] text-base ">
-                <button onClick={handleValidation}q>Reset Password</button>
-
-            </div> */}
+            
             <Button name="Reset Password" onClick={handleValidation} />
 
           </div>

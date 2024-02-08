@@ -4,9 +4,12 @@ import Input from "../../components/UI/Input";
 import { RxEyeOpen } from "react-icons/rx";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { GiCancel } from "react-icons/gi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./styles/style.css";
-import validation from "../../uttils/validators/validation";
+import loginValidation from "../../uttils/validators/loginValidation";
+import useFetch from "../../api/hooks/Useapi";
+import routes from "../../constants/routes";
+
 
 function Signin() {
   const navigate = useNavigate();
@@ -14,23 +17,39 @@ function Signin() {
     email: "",
     password: "",
   });
-  
+
+  const {
+    data,
+    fetchData,
+    errors: fetcherror,
+  } = useFetch({ url: "https://portal.umall.in/api/customer/login" });
+
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  function handleChange  (event)  {
-    const newObj = { ...values, [event.target.name]: event.target.value };
-    setValues(newObj);
-  }
 
-  function handleValidation(event) {
+   const handleValidation = async (event) => {
+    console.log("test");
     event.preventDefault();
-    setErrors(validation(values));
+    const validationErrors = loginValidation(values);
+
+    if (Object.keys(validationErrors).length === 0) {
+       fetchData({
+        email: values.email,
+        password: values.password,
+      });
+      if (data) {
+        console.log("getin");
+        navigate(routes.HomePage());
+      }
+    } else {
+      console.log("error");
+      setErrors(validationErrors);
+    }
   }
-  
 
   return (
     <>
@@ -51,12 +70,11 @@ function Signin() {
             <div className="ml-1">
               <Input
                 label="Email ID/Mobile Number"
-                values={values}               
+                value={values}
                 setValues={setValues}
-                field="email"        
+                field="email"
                 type="text"
                 placeholder="Mobile Number"
-                onChange={handleChange}
               />
               {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
             </div>
@@ -64,14 +82,13 @@ function Signin() {
             <div className="relative ml-1">
               <Input
                 label="Password"
-                values={values}
+                value={values}
                 setValues={setValues}
                 field="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="*******"
-                onChange={handleChange}
-
-              />{errors.password && (
+              />
+              {errors.password && (
                 <p style={{ color: "red" }}>{errors.password}</p>
               )}
               {showPassword ? (
@@ -85,12 +102,12 @@ function Signin() {
                   className="absolute h-6 w-7 top-9 right-3 pr-3 lg:m-1 md:m-1 -m-1 cursor-pointer"
                 />
               )}
-              
             </div>
 
             <div className="forpsw">
-              <button className=" text-blue-500  "
-                onClick={() => navigate("/forgotpass")}>Forgot password ?</button>
+              <Link to="/forgotpass" className=" text-blue-500">
+                Forgot password ?
+              </Link>
             </div>
 
             <div className="mb-2">
@@ -98,12 +115,9 @@ function Signin() {
             </div>
             <div className="text-center">
               not a user?
-              <button
-                className=" text-blue-500  "
-                onClick={() => navigate("/signup")}
-              >
-                Sign Up
-              </button>
+              <Link to="/signup" className=" text-blue-500  ">
+                &nbsp;Sign Up
+              </Link>
             </div>
             <div></div>
           </div>

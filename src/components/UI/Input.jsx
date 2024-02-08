@@ -2,7 +2,6 @@ import React from "react";
 import "../styles/style.css";
 
 function Input({ label, value, setValues, type, placeholder, tabIndex,field }) {
-  console.log(value);
   return (
     
     <div className="card">

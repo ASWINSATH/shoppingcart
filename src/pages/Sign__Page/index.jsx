@@ -3,9 +3,11 @@ import Input from "../../components/UI/Input";
 import Button from "../../components/UI/Button";
 import { RxEyeOpen } from "react-icons/rx";
 import { RiEyeCloseLine } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./styles/style.css";
 import validation from "../../uttils/validators/validation";
+import useFetch from "../../api/hooks/Useapi";
+import routes from "../../constants/routes";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -17,20 +19,47 @@ const SignUp = () => {
     confirmpassword: "",
   });
   const [errors, setErrors] = useState({});
-  
-  function handleChange  (event)  {
-    const newObj = { ...values, [event.target.name]: event.target.value };
-    setValues(newObj);
-  }
 
-  function handleValidation(event) {
+  const {
+    data,
+    fetchData,
+    errors: fetcherror,
+  } = useFetch({ url: "https://portal.umall.in/api/customer/register" });
+  
+  // function handleChange  (event)  {
+  //   const newObj = { ...values, [event.target.name]: event.target.value };
+  //   setValues(newObj);
+
+
+  // }
+
+   const handleValidation = async(event) => {
     event.preventDefault();
-    setErrors(validation(values));
+    // setErrors(validation(values));
+    const validationErrors = validation(values);
+
+    if (Object.keys(validationErrors).length === 0) {
+      await fetchData({
+        name: values.name,
+        email: values.email,
+        password: values.password,
+        phone: values.phone,
+      });
+      if (data) {
+        console.log("getin");
+        navigate(routes.signIn());
+      }
+    } else {
+      console.log("error");
+      setErrors(validationErrors);
+    }
   }
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  
 
   return (
     <div className="model1">
@@ -45,7 +74,7 @@ const SignUp = () => {
               type="text"
               field="name"
               placeholder="Enter Your Name"
-              onChange={handleChange}
+              // onChange={handleChange}
             />
             {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
           </div>
@@ -57,7 +86,7 @@ const SignUp = () => {
               type="email"
               field="email"
               placeholder="Enter Your Email"
-              onChange={handleChange}
+              // onChange={handleChange}
             />
             {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
           </div>
@@ -66,10 +95,10 @@ const SignUp = () => {
               label="Number"
               value={values}
               setValues={setValues}
-              type="phone"
+              type="number"
               field="phone"
               placeholder="Enter Your Number"
-              onChange={handleChange}
+              // onChange={handleChange}
             />
             {errors.phone && <p style={{ color: "red" }}>{errors.phone}</p>}
           </div>
@@ -81,7 +110,7 @@ const SignUp = () => {
               type={showPassword ? "text" : "password"}
               field="password"
               placeholder="Enter Your Psssword"
-              onChange={handleChange}
+              // onChange={handleChange}
             />
             {errors.password && (
               <p style={{ color: "red" }}>{errors.password}</p>
@@ -107,10 +136,10 @@ const SignUp = () => {
               type="password"
               field="confirmpassword"
               placeholder="Confirm Password"
-              onChange={handleChange}
+              // onChange={handleChange}
             />
-            {errors.confirmPassword && (
-              <p style={{ color: "red" }}>{errors.confirmPassword}</p>
+            {errors.confirmpassword && (
+              <p style={{ color: "red" }}>{errors.confirmpassword}</p>
             )}
           </div>
           <div className="mb-2">
@@ -118,9 +147,9 @@ const SignUp = () => {
           </div>
           <div className="text-center">
             Already have an account?
-            <button className="text-blue-500" onClick={() => navigate("/")}>
-              Log in
-            </button>
+            <Link to='/' className="text-blue-500">
+              &nbsp;Log in
+            </Link>
           </div>
         </div>
       </div>
