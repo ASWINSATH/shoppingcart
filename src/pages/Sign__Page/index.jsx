@@ -6,7 +6,7 @@ import { RiEyeCloseLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles/style.css";
 import validation from "../../uttils/validators/validation";
-import useFetch from "../../api/hooks/Useapi";
+import useFetch from "../../api/hooks/useApi";
 import routes from "../../constants/routes";
 
 const SignUp = () => {
@@ -19,47 +19,46 @@ const SignUp = () => {
     confirmpassword: "",
   });
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  const {
-    data,
-    fetchData,
-    errors: fetcherror,
-  } = useFetch({ url: "https://portal.umall.in/api/customer/register" });
-  
-  // function handleChange  (event)  {
-  //   const newObj = { ...values, [event.target.name]: event.target.value };
-  //   setValues(newObj);
+  const { fetchData } = useFetch({
+    url: "https://portal.umall.in/api/customer/register",
+  });
 
-
-  // }
-
-   const handleValidation = async(event) => {
+  const handleValidation = async (event) => {
+    setLoading(true);
     event.preventDefault();
-    // setErrors(validation(values));
     const validationErrors = validation(values);
 
     if (Object.keys(validationErrors).length === 0) {
-      await fetchData({
+      const data = await fetchData({
         name: values.name,
         email: values.email,
         password: values.password,
         phone: values.phone,
       });
-      if (data) {
-        console.log("getin");
+
+      if (data?.sts == "00") {
+        setLoading(false);
+        alert(data?.msg);
+      } else if (data?.sts == "01") {
+        setLoading(false);
         navigate(routes.signIn());
       }
     } else {
       console.log("error");
       setErrors(validationErrors);
+      setLoading(false);
     }
-  }
+  };
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  
+  if(loading){
+    <div>Loading...</div>
+  }
 
   return (
     <div className="model1">
@@ -147,7 +146,7 @@ const SignUp = () => {
           </div>
           <div className="text-center">
             Already have an account?
-            <Link to='/' className="text-blue-500">
+            <Link to="/" className="text-blue-500">
               &nbsp;Log in
             </Link>
           </div>

@@ -7,22 +7,20 @@ import { GiCancel } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles/style.css";
 import loginValidation from "../../uttils/validators/loginValidation";
-import useFetch from "../../api/hooks/Useapi";
+import useFetch from "../../api/hooks/useApi";
 import routes from "../../constants/routes";
 
-
-function Signin() {
+function SignIn() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
 
-  const {
-    data,
-    fetchData,
-    errors: fetcherror,
-  } = useFetch({ url: "https://portal.umall.in/api/customer/login" });
+  const { fetchData } = useFetch({
+    url: "https://portal.umall.in/api/customer/login",
+  });
 
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
@@ -30,25 +28,30 @@ function Signin() {
     setShowPassword(!showPassword);
   };
 
-
-   const handleValidation = async (event) => {
-    console.log("test");
+  const handleValidation = async (event) => {
     event.preventDefault();
     const validationErrors = loginValidation(values);
-
+    setLoading(true);
     if (Object.keys(validationErrors).length === 0) {
-       fetchData({
-        email: values.email,
+      const data = await fetchData({
+        emailormobile: values.email,
         password: values.password,
       });
-      if (data) {
-        console.log("getin");
+
+      if (data?.sts == "00") {
+        alert(data?.msg);
+        setLoading(false);
+      } else if (data?.sts == "01") {
         navigate(routes.HomePage());
+        setLoading(false);
       }
     } else {
-      console.log("error");
       setErrors(validationErrors);
+      setLoading(false);
     }
+  };
+  if (loading){
+    <div>Loading...</div>
   }
 
   return (
@@ -114,7 +117,7 @@ function Signin() {
               <Button name="Login" onClick={handleValidation} />
             </div>
             <div className="text-center">
-              not a user?
+              Not a user?
               <Link to="/signup" className=" text-blue-500  ">
                 &nbsp;Sign Up
               </Link>
@@ -127,4 +130,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default SignIn;

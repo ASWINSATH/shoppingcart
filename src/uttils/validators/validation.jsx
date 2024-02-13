@@ -21,21 +21,16 @@ export default function validation(values) {
     errors.phone = " Invalid Phone Number";
   }
 
-
   if (values.password === "") {
     errors.password = "Password Required";
-  // } else if (!password_pattern.test(values.password)) {
-  //   errors.password = "Passwords did'nt match";
+  } else if (!password_pattern.test(values.password)) {
+    errors.password = "Invalid Format";
    }
 
   if (values.confirmpassword === "") {
     errors.confirmpassword = " Confirm Password Required";
-  } else if (values.password !== values.confirmpassword) {
+  } else if (values.password != values.confirmpassword) {
     errors.confirmpassword = " Passwords did'nt match";
-  }
-
-  if (values.otp === "") {
-    errors.otp = "OTP Required";
   }
 
   return errors;
