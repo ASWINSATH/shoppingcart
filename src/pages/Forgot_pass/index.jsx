@@ -87,7 +87,7 @@ const Forgotpass = () => {
       <div className="bg-white rounded-2xl lg:w-[500px] md:w-[500px] w-[330px] flex justify-center ">
         <div className="lg:w-[280px] md:w-[280px] w-[295px] my-14">
           <div>
-            <div className="text-xl font-bold text-center pb-2">
+            <div className="text-xl font-bold text-center pb-2">s
               Welcome back !
             </div>
             <p className="font-normal text-md text-sm text-center">
