@@ -38,7 +38,7 @@ function Footer() {
             <div className='md:pb-10 lg:pb-20 pb-10'>
                 <h1 className="lg:text-xl text-large">Support</h1>
                 <div className="lg:text-sm text-xs lg:pt-5 pt-2">
-                    <h3 className="lg:py-2 py-1 pt-2">111 Bijoy sarani,Dhaka,DH <span class="block">1515,Bangladesh</span></h3>
+                    <h3 className="lg:py-2 py-1 pt-2">111 Bijoy sarani,Dhaka,DH <span className="block">1515,Bangladesh</span></h3>
                     <h3 className="lg:py-2 py-1 pt-2">exclusive@gmail.com</h3>
                     <h3 className="lg:py-2 py-1 pt-2">+88015-88888-9999</h3>
                 </div>
@@ -84,7 +84,7 @@ function Footer() {
                     </div>
                 </div>
 
-                <div class="flex lg:mt-8 mt-3">
+                <div className="flex lg:mt-8 mt-3">
                     <div><SlSocialFacebook size={24}/></div>
                     <div><CiTwitter size={24} className='ml-3'/></div>
                     <div><FaInstagram size={24} className='ml-3'/></div>
@@ -94,7 +94,7 @@ function Footer() {
 
         </div>
 
-        <div class="attribution text-slate-500 bg-black lg:text-center md:text-center">
+        <div className="attribution text-slate-500 bg-black lg:text-center md:text-center text-center">
           <h2>ERE Business Solutions 2023. All right reserved</h2>
         </div>
     </footer>

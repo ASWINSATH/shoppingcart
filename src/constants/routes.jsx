@@ -4,5 +4,7 @@ const routes = {
     signUp:()=> '/signup',
     ForgotPass:()=> '/forgotPass',
     HomePage:()=>'/HomePage',
+    AboutPage:()=>'/AboutPage',
+    ContactPage:()=>'/ContactPage'
 }
 export default routes;

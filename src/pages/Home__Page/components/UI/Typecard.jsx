@@ -9,7 +9,7 @@ const Typecard = ({img,label}) => {
       alt={label} 
       className='w-26 h-30 '/>
       
-      <p className='flex justify-center mt-2'>{label}</p>
+      <p className='flex justify-center lg:text-base md:text-base text-sm mt-2'>{label}</p>
 
     </div>
   )
